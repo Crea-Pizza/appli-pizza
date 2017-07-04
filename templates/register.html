@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% block title %}{%  trans "S'inscrire" %}{% endblock %}
+{% block body %}
+{% if user.is_authenticated %}
+{%  trans "Vous êtes déjà connecté" %}
+{% else %}
+
+    <h1>Formulaire d'inscription</h1>
+    <hr>
+    <div class="formulaire" style="text-align: center;width: 30%; margin-left: 30%">
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        {% for field in form.visible_fields %}
+            <h1>{{ field.label }}</h1>
+            <p>{{ field }}</p>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+
+        <button type="submit" class="btn-danger">Envoyer</button>
+    </form>
+    </div>
+{% endif %}
+{% endblock %}

@@ -118,3 +118,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
+
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/production')
+COMPRESS_ROOT = os.path.join(BASE_DIR, 'static')
+
