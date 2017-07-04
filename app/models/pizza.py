@@ -19,7 +19,7 @@ class Pizza(models.Model):
                               null=True,
                               blank=True,
                               default=None)
-    prix = models.FloatField(default=0,
+    prix = models.FloatField(default=0.0,
                              blank=True,
                              null=True)
 

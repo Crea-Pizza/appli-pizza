@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
     $.ajax({
         url: 'json/connected',
     }).done(function (data) {
@@ -19,7 +20,7 @@ $(document).ready(function() {
         // Récupération url
         var url = $(this).attr('action');
 
-       // Appel ajax
+        // Appel ajax
         $.ajax({
             url: url,
             method: $(this).attr('method'),
@@ -31,15 +32,15 @@ $(document).ready(function() {
         });
         // Fin ajax
 
-       return false; // Fait croire que le formulaire a eu un problème, et donc ne l'envoi pas
+        return false; // Fait croire que le formulaire a eu un problème, et donc ne l'envoi pas
     })
 
 
-   $('#login').submit(function () {
+    $('#login').submit(function () {
         // Récupération url
         var url = $(this).attr('action');
 
-       // Appel ajax
+        // Appel ajax
         $.ajax({
             url: url,
             method: $(this).attr('method'),
@@ -54,10 +55,8 @@ $(document).ready(function() {
         });
         // Fin ajax
 
-       return false; // Fait croire que le formulaire a eu un problème, et donc ne l'envoi pas
+        return false; // Fait croire que le formulaire a eu un problème, et donc ne l'envoi pas
     })
-
-
 
 
     /* ======= Fixed header when scrolled ======= */

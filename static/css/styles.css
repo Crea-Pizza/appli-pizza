@@ -67,6 +67,14 @@ a.btn-cta {
     padding: 10px 30px;
 }
 
+#btn-panier {
+    background: #4E9CAF;
+    padding: 8px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 .btn-primary {
     background: #40babd;
     border: 1px solid #40babd;
@@ -118,10 +126,13 @@ a.btn-cta {
     font-weight: bold;
     height: 100%;
 
-
 }
 
 /* ======= Header ======= */
+.container, .head-nav {
+    width: 1400px;
+}
+
 .header {
     position: fixed;
     width: 100%;
@@ -190,6 +201,7 @@ a.btn-cta {
     color: black;
 }
 
+/******* NAVIGATION *********/
 .main-nav {
     margin-top: 6px;
 }
@@ -259,6 +271,10 @@ a.btn-cta {
 .nav > li > a {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.panier-nav {
+    margin-top: 8px;
 }
 
 /* ====== Footer ====== */
@@ -1040,8 +1056,6 @@ a.btn-cta {
     }
 }
 
-/* Styles perso */
-
 .item-creer {
     font-family: 'Kanit', sans-serif;
     font-weight: bold;
@@ -1054,6 +1068,7 @@ a.btn-cta {
     text-align: center;
     margin-top: 20px;
 }
+
 #section_top {
     color: whitesmoke;
     margin-top: 10px;
@@ -1061,10 +1076,12 @@ a.btn-cta {
     padding-top: 10px;
     width: 50%;
 }
+
 #section_top .timetable {
     text-align: center;
     width: 100%;
 }
+
 .table {
     max-width: 100%;
     background-color: transparent;
@@ -1075,54 +1092,123 @@ a.btn-cta {
     border-spacing: 2px;
     border-color: grey;
 }
+
 #section_top .timetable .day {
     color: #000;
     font-weight: bold;
     padding: 5px;
     background: whitesmoke;
 }
+
 tr {
     display: table-row;
     vertical-align: inherit;
     border-color: inherit;
 }
+
 #section_top .timetable td {
     width: 6%;
     font-size: 11px;
     line-height: 20px;
 }
+
 td, th {
     display: table-cell;
     vertical-align: inherit;
 }
+
 #section_top .timetable {
     text-align: center;
     width: 100%;
 }
+
 #section_top .timetable .day {
     color: #000;
     background: #dbcbbe;
 }
+
 #section_top .timetable td {
     width: 6%;
     font-size: 11px;
     line-height: 20px;
 }
+
 #section_top .timetable .opened {
     background: darkred;
     width: 39%;
 }
+
 #section_top .timetable td {
     width: 6%;
     font-size: 11px;
     line-height: 20px;
 }
+
 td, th {
     display: table-cell;
     vertical-align: inherit;
 }
+
 #section_top .timetable td {
     width: 6%;
     font-size: 11px;
     line-height: 20px;
 }
+
+/****** PANIER ******/
+.panier_contenu {
+    display: block;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panier-item {
+    width: 100%;
+    margin-top: 20px;
+    display: block;
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+}
+
+.panier-list {
+    display: inline-block;
+    width: 50%;
+}
+
+.panier-list .item-title {
+    display: block;
+    font-weight: bold;
+}
+
+.panier-prix {
+    display: inline-block;
+    text-align: right;
+    width: 49%;
+    vertical-align: top;
+}
+
+.panier-valeur {
+    font-weight: bold;
+}
+
+.panier-quantite {
+    display: block;
+}
+
+.panier-total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.views import static
 
 from app.views.index import IndexView
+
 from app.views.json.connected import JsonIsConnectedView
 from app.views.json.login import JsonLoginView
 from app.views.json.logout import JsonLogout
+from app.views.panier import PanierView
 from app.views.register import RegisterView
-from pizzeria import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^logout/$', JsonLogout.as_view(), name='app_json_logout'),
     url(r'^json/connected/$', JsonIsConnectedView.as_view(), name='app_connected'),
     url(r'^register/$', RegisterView.as_view(), name='app_register'),
-    url(r'^public/(?P<path>.*)$', static.serve, {
-        'document_root': settings.MEDIA_ROOT
-    }, name='url_public'),
+    url(r'^ajouter/(\d+)', PanierView.ajouter_au_panier, name='ajouter_au_panier'),
+    url(r'^supprimer/(\d+)', PanierView.supprimer_du_panier, name='supprimer_du_panier'),
+    url(r'^panier/', PanierView.panier, name='panier'),
 ]

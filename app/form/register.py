@@ -7,46 +7,46 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class RegisterForm(forms.Form):
-
+    # Informations utilisateur
     a = _("Votre prénom")
     first_name = forms.CharField(
         label=a,
         localize=True,
-        required=False,
+        required=True,
         widget=widgets.TextInput(attrs={
             'title': a,
             'placeholder': a,
             'class': 'form-control'
         })
     )
+
     a = _("Votre nom")
-
     last_name = forms.CharField(
-        label= a,
+        label=a,
         localize=True,
-        required=False,
+        required=True,
         widget=widgets.TextInput(attrs={
             'title': a,
             'placeholder': a,
             'class': 'form-control'
         })
     )
+
     a = _("Votre pseudo")
-
     username = forms.CharField(
-        label= a,
+        label=a,
         localize=True,
-        required=False,
+        required=True,
         widget=widgets.TextInput(attrs={
             'title': a,
             'placeholder': a,
             'class': 'form-control'
         })
     )
-    a = _("Votre email")
 
+    a = _("Votre email")
     email = forms.CharField(
-        label= a,
+        label=a,
         localize=True,
         required=True,
         widget=widgets.TextInput(attrs={
@@ -58,7 +58,7 @@ class RegisterForm(forms.Form):
 
     a = _("Votre mot de passe")
     password = forms.CharField(
-        label= a,
+        label=a,
         localize=True,
         required=True,
         widget=widgets.TextInput(attrs={
@@ -68,13 +68,72 @@ class RegisterForm(forms.Form):
             'type': "password"
         })
     )
-    e = {'required' : _("This field is required"),
-         'invalid': _('This field contains invalid date')}
 
+    a = _("Confirmez le mot de passe")
+    password_verif = forms.CharField(
+        label=a,
+        localize=True,
+        required=True,
+        widget=widgets.TextInput(attrs={
+            'title': a,
+            'placeholder': a,
+            'class': 'form-control',
+            'type': "password"
+        })
+    )
+
+    # Information personne
+    a = _("Adresse")
+    adresse = forms.CharField(
+        label=a,
+        localize=True,
+        required=True,
+        widget=widgets.TextInput(attrs={
+            'title': a,
+            'placeholder': a,
+            'class': 'form-control'
+        })
+    )
+
+    a = _("Code postal")
+    cp = forms.IntegerField(
+        label=a,
+        localize=True,
+        required=True,
+        widget=widgets.NumberInput(attrs={
+            'title': a,
+            'placeholder': a,
+            'class': 'form-control'
+        })
+    )
+
+    a = _("Ville")
+    ville = forms.CharField(
+        label=a,
+        localize=True,
+        required=True,
+        widget=widgets.TextInput(attrs={
+            'title': a,
+            'placeholder': a,
+            'class': 'form-control'
+        })
+    )
+
+    a = _("Téléphone")
+    telephone = forms.IntegerField(
+        label=a,
+        localize=True,
+        required=True,
+        widget=widgets.NumberInput(attrs={
+            'title': a,
+            'placeholder': a,
+            'class': 'form-control'
+        })
+    )
 
     def clean_username(self):
         valeur = self.cleaned_data['username']
-        if not valeur :
+        if not valeur:
             self.add_error(
                 'username',
                 "Pas de pseudo"
@@ -92,5 +151,5 @@ class RegisterForm(forms.Form):
         valeur = self.cleaned_data['email']
         return valeur
 
-      #def clean(self):
-        #pass
+        # def clean(self):
+        # pass

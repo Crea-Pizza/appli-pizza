@@ -4,7 +4,7 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<html lang="fr"> <!--<![endif]-->
 <head>
     <title>CréaPizza - La pizza dans tous ses états</title>
     <!-- Meta -->
@@ -36,12 +36,15 @@
 <body>
 <!-- ******HEADER****** -->
 <header id="header" class="header">
-    <div class="container">
+    <div class="container head-nav">
         <h1 class="logo">
             <a class="scrollto" href="#hero">
-                <span class="logo-icon-wrapper"><img class="logo-icon" src="{% static 'images/logo-pizza.svg' %}" alt="icon"></span>
+                <span class="logo-icon-wrapper"><img class="logo-icon" src="{% static 'images/logo-pizza.svg' %}"
+                                                     alt="icon"></span>
                 <span class="text"><span class="highlight">Créa</span>Pizza</span></a>
         </h1><!--//logo-->
+
+        <!-- Barre de navigation -->
         <nav class="main-nav navbar-right" role="navigation">
             <div class="navbar-header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
@@ -58,12 +61,41 @@
                     <li class="nav-item"><a class="scrollto" href="#creer">Créer ma pizza</a></li>
                     <li class="nav-item"><a class="scrollto" href="#pizzeria">La pizzeria</a></li>
                     <li class="nav-item"><a class="scrollto" href="#contact">Nous contacter</a></li>
-                    <li class="nav-item" >
-
+                    <li class="nav-item">
+                        <form class="navbar-form" action="{% url 'app_json_login' %}" id="login" method="POST"
+                              style="display: none;">
+                            <input type="text" placeholder="Nom d'utilisateur" class="form-control" id="username"
+                                   name="username">
+                            <input type="password" placeholder="Mot de passe" class="form-control" id="password"
+                                   name="password">
+                            <button type="submit" class="btn btn-success">Se connecter</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}<h4 style="margin-top: 15px; font-weight: bold;">
+                            Bonjour {{ user.personne.prenom }} !</h4> {% endif %}
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item panier-nav">
+                            <a id="btn-panier" href="{% url 'panier' %}"
+                               style="color:black;"><span
+                                    class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <form action="{% url 'app_json_logout' %}" class="navbar-form navbar-right" role="form"
+                              id="logout" style="display: none;">
+                            <button type="submit" class="btn btn" style="background-color: darkred; color:whitesmoke;">
+                                Deconnexion
+                            </button>
+                        </form>
+                    </li>
 
                 </ul><!--//nav-->
             </div><!--//navabr-collapse-->
         </nav><!--//main-nav-->
+
+
     </div><!--//container-->
 </header><!--//header-->
 
@@ -81,8 +113,10 @@
                         <p class="intro"> ~ Commandez votre pizza pour le jour et l'heure de votre choix</p>
                         <p class="intro"> ~ Composez votre propre pizza</p>
                         <p class="intro"> ~ Gagnez des points de fidelité avec un compte client</p>
-                        <a class="btn btn-cta" href="" target="_blank"
-                           style="background-color: darkred; color:whitesmoke">Je crée mon compte !</a>
+                        {% if not user.is_authenticated %}
+                            <a class="btn btn-cta" href="{% url 'app_register' %}"
+                               style="background-color: darkred; color:whitesmoke">Je crée mon compte !</a>
+                        {% endif %}
                     </div><!--//item-content-inner-->
                 </div><!--//item-content-->
             </div><!--//item-->
@@ -103,7 +137,7 @@
                     <div class="item active">
                         <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas classiques</h3>
                         <div class="text-center text-carousel">
-                            <!-- |slice:":2" permet de limiter le nombre d'item -->
+                            <!-- Construction du menu des pizzas classiques -->
                             {% for pizza in pizzas_classique %}
                                 {% if forloop.first %}
                                     <div class="row">
@@ -114,7 +148,10 @@
                                     <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
                                 {% endfor %}
                                 <br/>
-                                <a href="#">Ajouter</a>
+                                <a href="{% url 'ajouter_au_panier' pizza.id %}"
+                                   style="background-color: transparent; padding: 1px; border:none; color: lightseagreen; text-decoration: none;">
+                                    Ajouter
+                                </a>
                                 <br/><br/>
                             </div>
                             {% if forloop.counter|divisibleby:3 %}</div>
@@ -129,6 +166,7 @@
                         <!-- Static Header -->
                         <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas base crème</h3>
                         <div class="text-center text-carousel">
+                            <!-- Construction du menu des pizzas cremes -->
                             {% for pizza in pizzas_creme %}
                                 {% if forloop.first %}
                                     <div class="row">
@@ -139,7 +177,10 @@
                                     <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
                                 {% endfor %}
                                 <br/>
-                                <a href="#">Ajouter</a>
+                                <button class="btn"
+                                        style="background-color: transparent; padding: 1px; border:none; color: lightseagreen;">
+                                    Ajouter
+                                </button>
                                 <br/><br/>
                             </div>
                             {% if forloop.counter|divisibleby:3 %}</div>
