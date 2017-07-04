@@ -1,245 +1,274 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="fr"> <!--<![endif]-->
-<head>
-    <title>CréaPizza - La pizza dans tous ses états</title>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Responsive HTML5 website landing page for developers and startups">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.css' %}">
-    <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-<!-- ******HEADER****** -->
-<header id="header" class="header">
-    <div class="container head-nav">
-        <h1 class="logo">
-            <a class="scrollto" href="#hero">
+{% block body %}
+    <!-- ******HEADER****** -->
+    <header id="header" class="header">
+        <div class="container head-nav">
+            <h1 class="logo">
+                <a class="scrollto" href="#hero">
                 <span class="logo-icon-wrapper"><img class="logo-icon" src="{% static 'images/logo-pizza.svg' %}"
                                                      alt="icon"></span>
-                <span class="text"><span class="highlight">Créa</span>Pizza</span></a>
-        </h1><!--//logo-->
+                    <span class="text"><span class="highlight">Créa</span>pizza</span></a>
+            </h1><!--//logo-->
 
-        <!-- Barre de navigation -->
-        <nav class="main-nav navbar-right" role="navigation">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button><!--//nav-toggle-->
-            </div><!--//navbar-header-->
+            <!-- Barre de navigation -->
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
 
-            <div id="navbar-collapse" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active nav-item"><a class="scrollto" href="#menu">Menu</a></li>
-                    <li class="nav-item"><a class="scrollto" href="#creer">Créer ma pizza</a></li>
-                    <li class="nav-item"><a class="scrollto" href="#pizzeria">La pizzeria</a></li>
-                    <li class="nav-item"><a class="scrollto" href="#contact">Nous contacter</a></li>
-                    <li class="nav-item">
-                        <form class="navbar-form" action="{% url 'app_json_login' %}" id="login" method="POST"
-                              style="display: none;">
-                            <input type="text" placeholder="Nom d'utilisateur" class="form-control" id="username"
-                                   name="username">
-                            <input type="password" placeholder="Mot de passe" class="form-control" id="password"
-                                   name="password">
-                            <button type="submit" class="btn btn-success">Se connecter</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        {% if user.is_authenticated %}<h4 style="margin-top: 15px; font-weight: bold;">
-                            Bonjour {{ user.personne.prenom }} !</h4> {% endif %}
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item panier-nav">
-                            <a id="btn-panier" href="{% url 'panier' %}"
-                               style="color:black;"><span
-                                    class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a>
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item"><a class="scrollto" href="#menu">Menu</a></li>
+                        <li class="nav-item"><a class="scrollto" href="#creer">Créer ma pizza</a></li>
+                        <li class="nav-item"><a class="scrollto" href="#pizzeria">La pizzeria</a></li>
+                        <li class="nav-item"><a class="scrollto" href="#contact">Nous contacter</a></li>
+                        <li class="nav-item">
+                            <form class="navbar-form" action="{% url 'app_json_login' %}" id="login" method="POST"
+                                  style="display: none;">
+                                <input type="text" placeholder="Nom d'utilisateur" class="form-control" id="username"
+                                       name="username">
+                                <input type="password" placeholder="Mot de passe" class="form-control" id="password"
+                                       name="password">
+                                <button type="submit" class="btn btn-success">Se connecter</button>
+                            </form>
                         </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <form action="{% url 'app_json_logout' %}" class="navbar-form navbar-right" role="form"
-                              id="logout" style="display: none;">
-                            <button type="submit" class="btn btn" style="background-color: darkred; color:whitesmoke;">
-                                Deconnexion
-                            </button>
-                        </form>
-                    </li>
-
-                </ul><!--//nav-->
-            </div><!--//navabr-collapse-->
-        </nav><!--//main-nav-->
-
-
-    </div><!--//container-->
-</header><!--//header-->
-
-<!-- Entête de la page -->
-<div id="hero" class="hero-section">
-    <!-- Style carousel -->
-    <div id="hero-carousel" class="hero-carousel" data-ride="carousel"
-         data-interval="10000">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item item-1 active">
-                <div class="item-content">
-                    <div class="item-content-inner">
-                        <h2 class="heading">La pizza dans tous ses états !</h2>
-                        <p class="intro"> ~ Commandez votre pizza pour le jour et l'heure de votre choix</p>
-                        <p class="intro"> ~ Composez votre propre pizza</p>
-                        <p class="intro"> ~ Gagnez des points de fidelité avec un compte client</p>
-                        {% if not user.is_authenticated %}
-                            <a class="btn btn-cta" href="{% url 'app_register' %}"
-                               style="background-color: darkred; color:whitesmoke">Je crée mon compte !</a>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}<h4 style="margin-top: 15px; font-weight: bold;">
+                                Bonjour {{ user.personne.prenom }} !</h4> {% endif %}
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item panier-nav">
+                                <a id="btn-panier" href="{% url 'panier' %}"
+                                   style="color:black;"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span> Mon Panier</a>
+                            </li>
                         {% endif %}
-                    </div><!--//item-content-inner-->
-                </div><!--//item-content-->
-            </div><!--//item-->
-        </div><!--//carousel-inner-->
-    </div><!--//carousel-->
-</div><!--//hero-->
-
-<!-- Menu pizzeria -->
-<div id="menu" class="menu-section">
-    <div class="container">
-        <div class="row">
-            <!-- Carousel -->
-            <h2 style="text-align: center; color: whitesmoke; font-weight: bold">~~~~ Le menu ~~~~</h2>
-            <div id="menu-carousel" class="carousel slide menu-carousel">
-
-                <!-- Catégorie classique -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas classiques</h3>
-                        <div class="text-center text-carousel">
-                            <!-- Construction du menu des pizzas classiques -->
-                            {% for pizza in pizzas_classique %}
-                                {% if forloop.first %}
-                                    <div class="row">
-                                {% endif %}
-                            <div class="col-xs-4">
-                                {{ pizza }} <br/>
-                                {% for ingredients in pizza.get_ingredients.all %}
-                                    <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
-                                {% endfor %}
-                                <br/>
-                                <a href="{% url 'ajouter_au_panier' pizza.id %}"
-                                   style="background-color: transparent; padding: 1px; border:none; color: lightseagreen; text-decoration: none;">
-                                    Ajouter
-                                </a>
-                                <br/><br/>
-                            </div>
-                            {% if forloop.counter|divisibleby:3 %}</div>
-                                <div class="row">{% endif %}
-                            {% if forloop.last %}</div>{% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <!-- Catégorie base crème -->
-                    <div class="item" style="text-align: center;">
-                        <!-- Static Header -->
-                        <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas base crème</h3>
-                        <div class="text-center text-carousel">
-                            <!-- Construction du menu des pizzas cremes -->
-                            {% for pizza in pizzas_creme %}
-                                {% if forloop.first %}
-                                    <div class="row">
-                                {% endif %}
-                            <div class="col-xs-4">
-                                {{ pizza }} <br/>
-                                {% for ingredients in pizza.get_ingredients.all %}
-                                    <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
-                                {% endfor %}
-                                <br/>
-                                <button class="btn"
-                                        style="background-color: transparent; padding: 1px; border:none; color: lightseagreen;">
-                                    Ajouter
+                        <li class="nav-item">
+                            <form action="{% url 'app_json_logout' %}" class="navbar-form navbar-right" role="form"
+                                  id="logout" style="display: none;">
+                                <button type="submit" class="btn btn"
+                                        style="background-color: darkred; color:whitesmoke;">
+                                    Deconnexion
                                 </button>
-                                <br/><br/>
+                            </form>
+                        </li>
+
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+
+
+        </div><!--//container-->
+    </header><!--//header-->
+
+    <!-- Entête de la page -->
+    <div id="hero" class="hero-section">
+        <!-- Style carousel -->
+        <div id="hero-carousel" class="hero-carousel" data-ride="carousel"
+             data-interval="10000">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item item-1 active">
+                    <div class="item-content">
+                        <div class="item-content-inner">
+                            <h2 class="heading">La pizza dans tous ses états !</h2>
+                            <p class="intro"> ~ Commandez votre pizza pour le jour et l'heure de votre choix</p>
+                            <p class="intro"> ~ Composez votre propre pizza</p>
+                            <p class="intro"> ~ Gagnez des points de fidelité avec un compte client</p>
+                            {% if not user.is_authenticated %}
+                                <a class="btn btn-cta" href="{% url 'app_register' %}"
+                                   style="background-color: darkred; color:whitesmoke">Je crée mon compte !</a>
+                            {% endif %}
+                        </div><!--//item-content-inner-->
+                    </div><!--//item-content-->
+                </div><!--//item-->
+            </div><!--//carousel-inner-->
+        </div><!--//carousel-->
+    </div><!--//hero-->
+
+    <!-- Menu pizzeria -->
+    <div id="menu" class="menu-section">
+        <div class="container">
+            <div class="row">
+                <!-- Carousel -->
+                <h2 style="text-align: center; color: whitesmoke; font-weight: bold">~~~~ Le menu ~~~~</h2>
+                <div id="menu-carousel" class="carousel slide menu-carousel">
+
+                    <!-- Catégorie classique -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas classiques</h3>
+                            <div class="text-center text-carousel">
+                                <!-- Construction du menu des pizzas classiques -->
+                                {% for pizza in pizzas_classique %}
+                                    {% if forloop.first %}
+                                        <div class="row">
+                                    {% endif %}
+                                <div class="col-xs-4">
+                                    {{ pizza }} <br/>
+                                    {% for ingredients in pizza.get_ingredients.all %}
+                                        <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
+                                    {% endfor %}
+                                    <br/>
+                                    <a href="{% url 'ajouter_au_panier' pizza.id %}"
+                                       style="background-color: transparent; padding: 1px; border:none; color: lightseagreen; text-decoration: none;">
+                                        Ajouter
+                                    </a>
+                                    <br/><br/>
+                                </div>
+                                {% if forloop.counter|divisibleby:3 %}</div>
+                                    <div class="row">{% endif %}
+                                {% if forloop.last %}</div>{% endif %}
+                                {% endfor %}
                             </div>
-                            {% if forloop.counter|divisibleby:3 %}</div>
-                                <div class="row">{% endif %}
-                            {% if forloop.last %}</div>{% endif %}
-                            {% endfor %}
-                            <br/>
+                        </div><!-- Fin classiques -->
+
+                        <!-- Catégorie base crème -->
+                        <div class="item" style="text-align: center;">
+                            <!-- Static Header -->
+                            <h3 style="text-align: center; color: red; font-weight: bold">Nos pizzas base crème</h3>
+                            <div class="text-center text-carousel">
+                                <!-- Construction du menu des pizzas cremes -->
+                                {% for pizza in pizzas_creme %}
+                                    {% if forloop.first %}
+                                        <div class="row">
+                                    {% endif %}
+                                <div class="col-xs-4">
+                                    {{ pizza }} <br/>
+                                    {% for ingredients in pizza.get_ingredients.all %}
+                                        <small>{{ ingredients }}{% if not forloop.last %},{% endif %}</small>
+                                    {% endfor %}
+                                    <br/>
+                                    <button class="btn"
+                                            style="background-color: transparent; padding: 1px; border:none; color: lightseagreen;">
+                                        Ajouter
+                                    </button>
+                                    <br/><br/>
+                                </div>
+                                {% if forloop.counter|divisibleby:3 %}</div>
+                                    <div class="row">{% endif %}
+                                {% if forloop.last %}</div>{% endif %}
+                                {% endfor %}
+                                <br/>
+                            </div>
+                        </div><!-- Fin bases crème -->
+
+                        <!-- Catégorie desserts -->
+                        <div class="item" style="text-align: center;">
+                            <!-- Static Header -->
+                            <h3 style="text-align: center; color: red; font-weight: bold">Nos desserts</h3>
+                            <div class="text-center text-carousel">
+                                <!-- Construction du menu des desserts -->
+                                {% for dessert in desserts %}
+                                    {% if forloop.first %}
+                                        <div class="row">
+                                    {% endif %}
+                                <div class="col-xs-4">
+                                    {{ dessert }} <br/>
+                                    <br/>
+                                    <button class="btn"
+                                            style="background-color: transparent; padding: 1px; border:none; color: lightseagreen;">
+                                        Ajouter
+                                    </button>
+                                    <br/><br/>
+                                </div>
+                                {% if forloop.counter|divisibleby:3 %}</div>
+                                    <div class="row">{% endif %}
+                                {% if forloop.last %}</div>{% endif %}
+                                {% endfor %}
+                                <br/>
+                            </div>
+                        </div><!-- Fin desserts -->
+
+                        <!-- Catégorie boissons -->
+                        <div class="item" style="text-align: center;">
+                            <!-- Static Header -->
+                            <h3 style="text-align: center; color: red; font-weight: bold">Nos boissons</h3>
+                            <div class="text-center text-carousel">
+                                <!-- Construction du menu des pizzas cremes -->
+                                {% for boisson in boissons %}
+                                    {% if forloop.first %}
+                                        <div class="row">
+                                    {% endif %}
+                                <div class="col-xs-4">
+                                    {{ boisson }} <br/>
+                                    <br/>
+                                    <button class="btn"
+                                            style="background-color: transparent; padding: 1px; border:none; color: lightseagreen;">
+                                        Ajouter
+                                    </button>
+                                    <br/><br/>
+                                </div>
+                                {% if forloop.counter|divisibleby:3 %}</div>
+                                    <div class="row">{% endif %}
+                                {% if forloop.last %}</div>{% endif %}
+                                {% endfor %}
+                                <br/>
+                            </div><!-- Fin boissons -->
+
+
                         </div>
                     </div>
                 </div>
-                <!-- Contrôle des slides -->
-                <a class="left carousel-control" href="#menu-carousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#menu-carousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div><!-- /carousel -->
-        </div>
+            </div>
+
+
+            <!-- Contrôle des slides -->
+            <a class="left carousel-control" href="#menu-carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#menu-carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div><!-- /carousel -->
     </div>
-</div><!--//menu-->
-<br/>
+    </div>
+    </div><!--//menu-->
+    <br/>
 
-<!-- Présentation de la section "je crée ma pizza" -->
-<div id="creer" class="creer-section">
-    <div class="container">
-        <h2 class="section-title text-center">Créer ma pizza</h2>
-        <div class="item center-block item-creer">
-            <ul>
-                <li>
-                    Créez une pizza unique, à votre image avec les ingrédients de votre choix !
-                </li>
-                <br/>
-                <li>
-                    Gagnez des points de fidelité bonus pour chaque pizza créées commandées avec un compte client !
-                </li>
-            </ul>
-        </div><!--//item-->
-        <div class="item item-reversed center-block">
-            <div style="text-align: center;">
-                <button type="submit" class="btn btn-info">
-                    Je crée ma pizza !!
-                </button>
-            </div><!--//quote-holder-->
-        </div><!--//item-->
-    </div><!--//container-->
-</div><!--//creer-->
+    <!-- Présentation de la section "je crée ma pizza" -->
+    <div id="creer" class="creer-section">
+        <div class="container">
+            <h2 class="section-title text-center">Créer ma pizza</h2>
+            <div class="item center-block item-creer">
+                <ul>
+                    <li>
+                        Créez une pizza unique, à votre image avec les ingrédients de votre choix !
+                    </li>
+                    <br/>
+                    <li>
+                        Gagnez des points de fidelité bonus pour chaque pizza créées commandées avec un compte client !
+                    </li>
+                </ul>
+            </div><!--//item-->
+            <div class="item item-reversed center-block">
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-info">
+                        Je crée ma pizza !!
+                    </button>
+                </div><!--//quote-holder-->
+            </div><!--//item-->
+        </div><!--//container-->
+    </div><!--//creer-->
 
-<!-- Lieu et horaires d'ouverture de la pizzeria -->
-<div id="pizzeria" class="pizzeria-section">
+    <!-- Lieu et horaires d'ouverture de la pizzeria -->
+    <div id="pizzeria" class="pizzeria-section">
     <div class="container text-center">
-        <h2 class="section-title">La Pizzeria CréaPizza</h2>
+        <h2 class="section-title">La Pizzeria Créapizza</h2>
         <br/>
         <div class="tabbed-area row">
 
             <div class="col-md-6" style="float:right;">
 
                 <h2>Nous trouver</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23143.55826278054!2d5.424102116856814!3d43.524344164042674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c98dfbf34fcf6d%3A0x1401d5629db8419c!2sC%C3%B4te+Pizza!5e0!3m2!1sfr!2sfr!4v1499017770790"
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23143.55826278054!2d5.424102116856814!3d43.524344164042674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c98dfbf34fcf6d%3A0x1401d5629db8419c!2sC%C3%B4te+produit!5e0!3m2!1sfr!2sfr!4v1499017770790"
                         width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
             </div>
@@ -379,6 +408,6 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
-</body>
+{% endblock %}
 </html> 
 

@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from app.views.checkout import CheckoutView
 from app.views.index import IndexView
 
 from app.views.json.connected import JsonIsConnectedView
@@ -27,11 +28,18 @@ from app.views.register import RegisterView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='app_index'),
+    # CONNEXION / DECONNEXION / INSCRIPTION
     url(r'^login/$', JsonLoginView.as_view(), name='app_json_login'),
     url(r'^logout/$', JsonLogout.as_view(), name='app_json_logout'),
     url(r'^json/connected/$', JsonIsConnectedView.as_view(), name='app_connected'),
     url(r'^register/$', RegisterView.as_view(), name='app_register'),
+    # PANIER -- (\d+) : digit
     url(r'^ajouter/(\d+)', PanierView.ajouter_au_panier, name='ajouter_au_panier'),
     url(r'^supprimer/(\d+)', PanierView.supprimer_du_panier, name='supprimer_du_panier'),
     url(r'^panier/', PanierView.panier, name='panier'),
+    # COMMANDE -- (\w+) : alpa
+    url(r'^checkout/(\w+)', CheckoutView.checkout, name='checkout'),
+    url(r'^process/(\w+)', CheckoutView.process_commande, name='process_commande'),
+    url(r'^erreur_commande/', CheckoutView.erreur_commande, name='erreur_commande'),
+    url(r'^complete_commande/(\w+)', CheckoutView.complete_commande, name='complete_commande'),
 ]

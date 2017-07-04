@@ -4,17 +4,17 @@ from django.views import generic
 
 from app.models.commande import Commande
 from app.models.panier import Panier
-from app.models.pizza import Pizza
+from app.models.produit import Produit
 
 
 class PanierView(generic.TemplateView):
 
-    def ajouter_au_panier(request, pizza_id):
+    def ajouter_au_panier(request, produit_id):
         # L'utilisateur doit être connecté
         if request.user.is_authenticated():
             try:
-                # On regarde si le pizza_id passé existe bien parmi les Pizzas
-                pizza = Pizza.objects.get(id=pizza_id)
+                # On regarde si le produit_id passé existe bien parmi les produits
+                produit = Produit.objects.get(id=produit_id)
             except ObjectDoesNotExist:
                 pass
             else:
@@ -27,25 +27,25 @@ class PanierView(generic.TemplateView):
                         user=request.user
                     )
                     panier.save()
-                # On ajoute la pizza au panier
-                panier.ajouter_au_panier(pizza_id)
+                # On ajoute la produit au panier
+                panier.ajouter_au_panier(produit_id)
             return redirect('panier')
         else:
             return redirect('/')
 
 
-    def supprimer_du_panier(request, pizza_id):
+    def supprimer_du_panier(request, produit_id):
         # L'utilisateur doit être connecté
         if request.user.is_authenticated():
             try:
-                # On regarde si le pizza_id passé existe bien parmi les Pizzas
-                pizza = Pizza.objects.get(id=pizza_id)
+                # On regarde si le produit_id passé existe bien parmi les produits
+                produit = Produit.objects.get(id=produit_id)
             except ObjectDoesNotExist:
                 pass
             else:
-                # On supprime la pizza demandée du panier
+                # On supprime la produit demandée du panier
                 panier = Panier.objects.get(user=request.user, active=True)
-                panier.supprimer_du_panier(pizza_id)
+                panier.supprimer_du_panier(produit_id)
             return redirect('panier')
         else:
             return redirect('/')
@@ -57,10 +57,10 @@ class PanierView(generic.TemplateView):
             commandes = Commande.objects.filter(panier=panier)
             # Total prix
             total = 0
-            # Nombre de pizzas
+            # Nombre de produits
             cpt = 0
             for commande in commandes:
-                total += (commande.pizza.prix * commande.quantite)
+                total += (commande.produit.prix * commande.quantite)
                 cpt += commande.quantite
             context = {
                 'panier': commandes,
