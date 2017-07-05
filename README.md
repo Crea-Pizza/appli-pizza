@@ -1,2 +1,6 @@
 # appli-pizza
-Projet pizzéria
+Projet pizzeria
+
+Fonctionnalités :
+  - Commande en ligne
+  - Précommande
