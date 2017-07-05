@@ -78,7 +78,7 @@ class CheckoutView(generic.TemplateView):
 
     def erreur_commande(request):
         if request.user.is_authenticated():
-            return render(request, 'erreur_commande.html')
+            return render(request, 'commande/erreur_commande.html')
         else:
             return redirect('/')
 
@@ -95,7 +95,7 @@ class CheckoutView(generic.TemplateView):
                     'panier': commandes,
                     'total': total
                 }
-                return render(request, 'process_commande.html', context)
+                return render(request, 'commande/process_commande.html', context)
         else:
             return redirect('/')
 
@@ -118,6 +118,6 @@ class CheckoutView(generic.TemplateView):
                 context = {
                     'message': message,
                 }
-                return render(request, 'commande_accomplie.html', context)
+                return render(request, 'commande/commande_accomplie.html', context)
         else:
             return redirect('/')

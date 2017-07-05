@@ -36,10 +36,10 @@ urlpatterns = [
     # PANIER -- (\d+) : digit
     url(r'^ajouter/(\d+)', PanierView.ajouter_au_panier, name='ajouter_au_panier'),
     url(r'^supprimer/(\d+)', PanierView.supprimer_du_panier, name='supprimer_du_panier'),
-    url(r'^panier/', PanierView.panier, name='panier'),
+    url(r'^commande/panier/', PanierView.panier, name='panier'),
     # COMMANDE -- (\w+) : alpa
     url(r'^checkout/(\w+)', CheckoutView.checkout, name='checkout'),
     url(r'^process/(\w+)', CheckoutView.process_commande, name='process_commande'),
-    url(r'^erreur_commande/', CheckoutView.erreur_commande, name='erreur_commande'),
-    url(r'^complete_commande/(\w+)', CheckoutView.complete_commande, name='complete_commande'),
+    url(r'^commande/erreur_commande/', CheckoutView.erreur_commande, name='erreur_commande'),
+    url(r'^commande/complete_commande/(\w+)', CheckoutView.complete_commande, name='complete_commande'),
 ]

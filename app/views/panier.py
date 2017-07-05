@@ -67,6 +67,6 @@ class PanierView(generic.TemplateView):
                 'total': total,
                 'cpt': cpt,
             }
-            return render(request, 'panier.html', context)
+            return render(request, 'commande/panier.html', context)
         else:
             return redirect('/')

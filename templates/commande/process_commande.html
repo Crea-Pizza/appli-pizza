@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <!-- ******HEADER****** -->
+    <header id="header" class="header">
+        <div class="container head-nav">
+            <h1 class="logo">
+                <a class="scrollto" href="#hero">
+                <span class="logo-icon-wrapper"><img class="logo-icon" src="{% static 'images/logo-pizza.svg' %}"
+                                                     alt="icon"></span>
+                    <span class="text"><span class="highlight">Créa</span>pizza</span></a>
+            </h1><!--//logo-->
+
+            <!-- Barre de navigation -->
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
+
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <a href="/">Retour à la page principale</a>
+                        </li>
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+        </div><!--//container-->
+    </header><!--//header-->
+
+
+    <br/><br/>
+    <hr/>
+    <div class="col-md-8 col-md-offset-2 col-sm-12">
+        <div style="text-align:center;text-decoration:underline;"><h3>Confirmez votre commande</h3></div>
+        <div class="panier_contenu">
+            {% for item in panier %}
+                <div class="panier-item">
+                    <div class="panier-list">
+                        <span class="item-title">{{ item.produit.label }}</span> Taille : {{ item.produit.taille }}
+                    </div>
+                    <div class="panier-prix">
+                            <span class="panier-quantite">{{ item.quantite }} x <span
+                                    class="panier-valeur">{{ item.produit.prix }}</span></span>
+                        Quantité : <a href="{% url 'ajouter_au_panier' item.produit.id %}">[+]</a> / <a
+                            href="{% url 'supprimer_du_panier' item.produit.id %}">[-]</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div>
+                    Votre panier est vide :(
+                </div>
+            {% endfor %}
+            <div class="panier-total">
+                <h4>Total : <span class="panier-valeur">{{ total }}</span></h4>
+                <a href="{% url 'complete_commande' 'paypal' %}"><input type="submit" id="btn-achat" class="btn btn-success" value="Acheter"/></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
