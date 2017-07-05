@@ -29,7 +29,7 @@ class PanierView(generic.TemplateView):
                     panier.save()
                 # On ajoute la produit au panier
                 panier.ajouter_au_panier(produit_id)
-            return redirect('panier')
+            return redirect(request.META['HTTP_REFERER'])
         else:
             return redirect('/')
 
